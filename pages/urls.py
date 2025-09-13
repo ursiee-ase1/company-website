@@ -1,8 +1,10 @@
 from django.urls import path
 
-from .views import home_page_view, AboutPageView
+from .views import home, about, services, contact
 
 urlpatterns = [
-    path("about/", AboutPageView.as_view(), name="about"),  # About page URL
-    path("", home_page_view, name="home"),  # Home page URL
+    path("", home, name="home"),  # Home page URL
+    path("about/", about, name="about"),  # About page URL
+    path("services/", services, name="services"),  # Services page URL
+    path("contact/", contact, name="contact"),  # Contact page URL
 ]

@@ -1,0 +1,58 @@
+{% comment %}
+Social Media Sharing Component
+Include this in any template where you want social sharing buttons
+{% endcomment %}
+
+<div class="social-share mt-4">
+    <h6 class="mb-3">Share this page:</h6>
+    <div class="social-share-buttons">
+        <a href="https://www.facebook.com/sharer/sharer.php?u={{ request.build_absolute_uri }}" target="_blank"
+            rel="noopener noreferrer" class="btn btn-outline-primary btn-sm me-2 mb-2" title="Share on Facebook">
+            <i class="bi bi-facebook me-1"></i> Facebook
+        </a>
+
+        <a href="https://twitter.com/intent/tweet?url={{ request.build_absolute_uri }}&text={{ page_title|default:'Check out this page' }}"
+            target="_blank" rel="noopener noreferrer" class="btn btn-outline-info btn-sm me-2 mb-2"
+            title="Share on Twitter">
+            <i class="bi bi-twitter me-1"></i> Twitter
+        </a>
+
+        <a href="https://www.linkedin.com/sharing/share-offsite/?url={{ request.build_absolute_uri }}" target="_blank"
+            rel="noopener noreferrer" class="btn btn-outline-primary btn-sm me-2 mb-2" title="Share on LinkedIn">
+            <i class="bi bi-linkedin me-1"></i> LinkedIn
+        </a>
+
+        <a href="https://wa.me/?text={{ page_title|default:'Check out this page' }} {{ request.build_absolute_uri }}"
+            target="_blank" rel="noopener noreferrer" class="btn btn-outline-success btn-sm me-2 mb-2"
+            title="Share on WhatsApp">
+            <i class="bi bi-whatsapp me-1"></i> WhatsApp
+        </a>
+
+        <button onclick="copyToClipboard('{{ request.build_absolute_uri }}')"
+            class="btn btn-outline-secondary btn-sm me-2 mb-2" title="Copy link">
+            <i class="bi bi-link-45deg me-1"></i> Copy Link
+        </button>
+    </div>
+</div>
+
+<script>
+    function copyToClipboard(text) {
+        navigator.clipboard.writeText(text).then(function () {
+            // Show success message
+            const button = event.target.closest('button');
+            const originalText = button.innerHTML;
+            button.innerHTML = '<i class="bi bi-check me-1"></i> Copied!';
+            button.classList.remove('btn-outline-secondary');
+            button.classList.add('btn-success');
+
+            setTimeout(function () {
+                button.innerHTML = originalText;
+                button.classList.remove('btn-success');
+                button.classList.add('btn-outline-secondary');
+            }, 2000);
+        }).catch(function (err) {
+            console.error('Could not copy text: ', err);
+            alert('Could not copy link. Please copy manually: ' + text);
+        });
+    }
+</script>

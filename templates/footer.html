@@ -1,0 +1,45 @@
+<footer class="bg-dark text-light py-4 mt-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <h5 class="fw-bold">TechCorp Solutions</h5>
+                <p class="mb-0">Delivering innovative technology solutions for modern businesses.</p>
+            </div>
+            <div class="col-md-6 text-md-end">
+                <h6>Follow Us</h6>
+                <div class="social-links">
+                    {% for link in social_media_links %}
+                    <a href="{{ link.url }}" {% if link.platform !='email' and link.platform !='phone' %}target="_blank"
+                        rel="noopener noreferrer" {% endif %} class="text-light me-3"
+                        title="{% if link.platform == 'email' %}Send us an email{% elif link.platform == 'phone' %}Call us{% else %}Follow us on {{ link.get_platform_display }}{% endif %}">
+                        <i class="bi {{ link.icon_class }} fs-4"></i>
+                    </a>
+                    {% empty %}
+                    <!-- Fallback static links if no social media links in database -->
+                    <a href="https://facebook.com/techcorpsolutions" target="_blank" rel="noopener noreferrer"
+                        class="text-light me-3" title="Follow us on Facebook">
+                        <i class="bi bi-facebook fs-4"></i>
+                    </a>
+                    <a href="https://twitter.com/techcorpsol" target="_blank" rel="noopener noreferrer"
+                        class="text-light me-3" title="Follow us on Twitter">
+                        <i class="bi bi-twitter fs-4"></i>
+                    </a>
+                    <a href="https://linkedin.com/company/techcorp-solutions" target="_blank" rel="noopener noreferrer"
+                        class="text-light me-3" title="Connect with us on LinkedIn">
+                        <i class="bi bi-linkedin fs-4"></i>
+                    </a>
+                    <a href="mailto:{{ company_info.email|default:'info@techcorpsolutions.com' }}" class="text-light"
+                        title="Send us an email">
+                        <i class="bi bi-envelope fs-4"></i>
+                    </a>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+        <hr class="my-3">
+        <div class="row">
+            <div class="col-12 text-center">
+                <p class="mb-0">&copy; 2024 TechCorp Solutions. All rights reserved.</p>
+            </div>
+        </div>
+    </div>

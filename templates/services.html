@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+
+{% block title %}Services - TechCorp Solutions{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <div class="row">
+        <div class="col-lg-8 mx-auto text-center mb-5">
+            <h1>Our Services</h1>
+            <p class="lead">
+                We offer comprehensive technology solutions tailored to meet your business needs.
+                From web development to cloud consulting, we've got you covered.
+            </p>
+        </div>
+    </div>
+
+    <div class="row">
+        {% for service in services %}
+        <div class="col-lg-6 mb-4">
+            <div class="card h-100 shadow-sm">
+                <div class="card-body">
+                    <div class="d-flex align-items-center mb-3">
+                        <i class="bi {{ service.icon }} fs-2 text-primary me-3"></i>
+                        <h4 class="card-title mb-0">{{ service.title }}</h4>
+                        {% if service.is_featured %}
+                        <span class="badge bg-warning ms-2">Featured</span>
+                        {% endif %}
+                    </div>
+                    <p class="card-text">{{ service.description }}</p>
+                </div>
+            </div>
+        </div>
+        {% empty %}
+        <div class="col-12">
+            <div class="alert alert-info text-center">
+                <h4>Services Coming Soon!</h4>
+                <p>We're preparing our service offerings. Please check back soon or contact us for more information.</p>
+                <a href="{% url 'contact' %}" class="btn btn-primary">Contact Us</a>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
